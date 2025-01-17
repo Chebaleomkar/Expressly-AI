@@ -1,0 +1,31 @@
+{
+  "manifest_version": 3,
+  "name": "Expressly Ai",
+  "version": "1.0",
+  "description": "Enhance WhatsApp messages with Expressly AI.",
+  "permissions": ["activeTab", "scripting"],
+  "host_permissions": ["https://web.whatsapp.com/*"],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "content_scripts": [
+    {
+      "matches": ["https://web.whatsapp.com/*"],
+      "js": ["content.js"],
+      "css": ["styles.css"]
+    }
+  ],
+  "action": {
+    "default_popup": "popup.html",
+    "default_icon": {
+      "16": "./ai.png",
+      "48": "./ai.png",
+      "128": "./ai.png"
+    }
+  },
+  "icons": {
+    "16": "./ai.png",
+    "48": "./ai.png",
+    "128": "./ai.png"
+  }
+}

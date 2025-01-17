@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Expressly Ai</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body>
+  <div class="popup-container">
+    <!-- Tabs -->
+    <div class="tabs">
+      <button class="tab-button active" data-tab="moods">Moods</button>
+      <button class="tab-button" data-tab="prompt">Prompt</button>
+      <button class="tab-button" data-tab="settings">Settings</button>
+    </div>
+
+    <!-- Moods Tab -->
+    <div id="moods" class="tab-content active">
+      <h2>Select a Mood</h2>
+      <div class="moods-list">
+        <!-- Moods will be dynamically added here -->
+      </div>
+    </div>
+
+    <!-- Prompt Tab -->
+    <div id="prompt" class="tab-content">
+      <h2>Custom Instructions</h2>
+      <textarea id="prompt-input" placeholder="Specify how you want the message to sound..."></textarea>
+    </div>
+
+    <!-- Settings Tab -->
+    <div id="settings" class="tab-content">
+      <h2>Theme Settings</h2>
+      <label>
+        <input type="radio" name="theme" value="light" checked> Light Theme
+      </label>
+      <label>
+        <input type="radio" name="theme" value="dark"> Dark Theme
+      </label>
+    </div>
+
+    <!-- Actions -->
+    <div class="actions">
+      <button id="accept-button">Accept</button>
+      <button id="discard-button">Discard</button>
+      <button id="regenerate-button">Regenerate</button>
+    </div>
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+</html>
