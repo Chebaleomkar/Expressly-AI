@@ -41,8 +41,26 @@ const moodArray = [
     "Caring 🤗",
     "Peaceful ✌️",
 ];
+//utilities
 
-// Function to create the tooltip
+let selectedMoods = [];
+
+// Function to handle mood selection
+function handleMoodSelection(moodButton, mood) {
+  // Toggle mood selection
+  if (selectedMoods.includes(mood)) {
+    // Deselect mood
+    selectedMoods = selectedMoods.filter((m) => m !== mood);
+    moodButton.style.backgroundColor = "#666"; // Default background color
+  } else {
+    // Select mood
+    selectedMoods.push(mood);
+    moodButton.style.backgroundColor = "#007bff"; // Selected background color
+  }
+
+  console.log("Selected Moods:", selectedMoods);
+}
+
 function createTooltip() {
     const tooltip = document.createElement("div");
     tooltip.id = "ai-tooltip";
@@ -56,7 +74,7 @@ function createTooltip() {
   
       <div id="moods" class="tooltip-tab-content active">
         <div class="moods-list">
-          ${moodArray.map((mood) => `<button>${mood}</button>`).join("")}
+          ${moodArray.map((mood) => `<button id= >${mood}</button>`).join("")}
         </div>
       </div>
   
@@ -100,6 +118,26 @@ function showTooltip(aiIcon) {
 
     // Add event listeners for tabs, themes, and actions
     setupTooltipFunctionality(tooltip);
+
+    const moodButtons = tooltip.querySelectorAll(".moods-list button");
+    moodButtons.forEach((button) => {
+      button.addEventListener("click", () => {
+        const mood = button.textContent;
+        handleMoodSelection(button, mood);
+      });
+    });
+
+    const promptTextarea= tooltip.querySelector("#prompt-input");
+    if(!promptTextarea){
+        console.log('TextArea failed to load')
+    }
+    if (promptTextarea) {
+        promptTextarea.addEventListener("input", (event) => {
+          const userInput = event.target.value;
+          console.log("User Input in Prompt:", userInput);
+        });
+      }
+
 }
 
 // Function to handle tooltip functionality

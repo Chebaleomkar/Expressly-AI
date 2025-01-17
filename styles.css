@@ -15,7 +15,7 @@ body {
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   z-index: 1000;
   padding: 20px;
-  bottom: 10%;
+  bottom: 12%;
   right: 1.5rem;
   display: flex;
   flex-direction: column;
@@ -64,7 +64,7 @@ body {
 /* Moods List */
 
 #moods{
-  height: 21.3rem;
+  height: 22rem;
   overflow: auto;
 }
 
@@ -100,6 +100,7 @@ body {
   border: 1px solid #777;
   border-radius: 5px;
   resize: none;
+  margin : -9px
 }
 
 /* Settings Tab */
@@ -187,7 +188,7 @@ body {
 /* utility */
 
 .hidden{
-  display:hidden;
+  display:none;
 }
 
 .block{
