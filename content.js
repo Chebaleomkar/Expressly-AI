@@ -206,23 +206,18 @@ function showTooltip(aiIcon) {
   setupTooltipFunctionality(tooltip);
 }
 
-
-// Function to add the AI icon
 function addAIIcon() {
   const inputContainer = document.querySelector("div._ak1r");
-  if (inputContainer && !inputContainer.querySelector("button[aria-label='AI Enhancer']")) {
-    const aiIcon = document.createElement("button");
+  if (inputContainer && !inputContainer.querySelector("div[aria-label='AI Enhancer']")) {
+    const aiIcon = document.createElement("div");
     aiIcon.innerHTML = `
-      <span aria-hidden="true" data-icon="ai" class="">
-        <svg viewBox="0 0 24 24" height="24" width="24" preserveAspectRatio="xMidYMid meet" fill="none">
-          <title>AI</title>
-          <path fill="currentColor" d="M12 2L2 22h20L12 2zm0 4l7 14H5l7-14z"></path>
-        </svg>
-      </span>
+      <div class='center'>
+        <div id='box' class='ai-icon'>
+        <img style="height: 31px; border-radius: 50%;" src="https://omkarchebale.vercel.app/ai.png" alt="Ai icon"  />
+        </div>
+      </div>
     `;
-    aiIcon.className = "xjb2p0i xk390pu x1ypdohk xjbqb8w x972fbf xcfux6l x1qhh985 xm0m39n xexx8yu x4uap5 x18d9i69 xkhd6sd xfect85";
     aiIcon.setAttribute("aria-label", "AI Enhancer");
-    aiIcon.style.marginLeft = "8px";
     aiIcon.addEventListener("click", () => showTooltip(aiIcon));
     inputContainer.appendChild(aiIcon);
   }
