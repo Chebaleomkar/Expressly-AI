@@ -1,3 +1,4 @@
+
 const moodArray = [
   "Love ❤️", "Happy 😄", "Sad 😢", "Angry 😠", "Excited 🤩", "Confused 😕", "Sarcastic 😏", 
   "Professional 💼", "Casual 😎", "Grateful 🙏", "Motivational 💪", "Relaxed 🧘", "Romantic 💖", 
@@ -19,7 +20,26 @@ function handleMoodSelection(moodButton, mood) {
     selectedMoods.push(mood);
     moodButton.style.backgroundColor = "#007bff"; // Select mood
   }
-  console.log("Selected Moods:", selectedMoods);
+  updateButtonText();
+}
+
+function updateButtonText() {
+  const generateButton = document.querySelector("#generate-button");
+  const acceptButton = document.querySelector("#accept-button");
+
+  if (selectedMoods.length > 0) {
+    // If moods are selected, show "Generate"
+    generateButton.style.display = "inline-block";
+    generateButton.textContent = "Generate";
+  } else if (acceptButton.style.display === "inline-block") {
+    // If no moods are selected but the accept button is visible, show "Regenerate"
+    generateButton.style.display = "inline-block";
+    generateButton.textContent = "Regenerate";
+  } else {
+    // If no moods are selected and the accept button is not visible, show "Generate"
+    generateButton.style.display = "inline-block";
+    generateButton.textContent = "Generate";
+  }
 }
 
 // Utility function to create the tooltip
@@ -47,12 +67,11 @@ function createTooltip() {
       <label><input type="radio" name="theme" value="dark" checked> Dark Theme</label>
     </div>
     <div id="aioptions"  class="tooltip-actions">
-      <input type="text" id="input-box" placeholder="Enter text here" />
-      <div class="button-group">
-        <button id="generate-button">Generate</button>
-        <button class="text-sm font-bold" id="accept-button" style="display: none;">Accept</button>
-        <button id="discard-button" style="display: none;">Discard</button>
-        <button id="regenerate-button" style="display: none;">Regenerate</button>
+    <textarea type="text" id="input-box"  rows="5" cols="50" placeholder="Enter message here ... "></textarea>
+    <div class="button-group">
+    <button class="text-sm font-bold" id="accept-button" style="display: none;">Accept</button>
+    <button id="discard-button" style="display: none;">Discard</button>
+    <button id="generate-button">Generate</button>
       </div>
     </div>
   `;
@@ -77,14 +96,12 @@ async function callEnhancementAPI(prompt, moods, originalMessage) {
   }
 }
 
-// Function to handle Generate button click
 function handleGenerateButtonClick(tooltip) {
   const generateButton = tooltip.querySelector("#generate-button");
   const acceptButton = tooltip.querySelector("#accept-button");
   const discardButton = tooltip.querySelector("#discard-button");
-  const regenerateButton = tooltip.querySelector("#regenerate-button");
   const promptTextarea = tooltip.querySelector("#prompt-input");
-  const inputBox = tooltip.querySelector('#input-box')
+  const inputBox = tooltip.querySelector("#input-box");
 
   generateButton.addEventListener("click", async () => {
     // Extract the message from the WhatsApp input box
@@ -102,23 +119,25 @@ function handleGenerateButtonClick(tooltip) {
 
     try {
       const enhancedMessage = await callEnhancementAPI(prompt, moods, originalMessage);
-      if (inputBox) inputBox.value = enhancedMessage;
-
+      if (inputBox) {
+        // Add the AI-enhanced animation class
+        inputBox.classList.add("ai-enhanced");
+    
+        // Set the new value to the input box
+        inputBox.value = enhancedMessage;
+        // Remove the animation class after a delay
+        setTimeout(() => {
+          inputBox.classList.remove("ai-enhanced");
+        }, 5000);
+      }
       generateButton.style.display = "none";
       acceptButton.style.display = "inline-block";
       discardButton.style.display = "inline-block";
-      regenerateButton.style.display = "inline-block";
+
+      updateButtonText(); // Update button text after API call
     } catch (error) {
       alert(error.message);
     }
-  });
-}
-
-// Function to handle Regenerate button click
-function handleRegenerateButtonClick(tooltip) {
-  const regenerateButton = tooltip.querySelector("#regenerate-button");
-  regenerateButton.addEventListener("click", () => {
-    tooltip.querySelector("#generate-button").click();
   });
 }
 
@@ -186,7 +205,6 @@ function setupTooltipFunctionality(tooltip) {
 
   // Button Handlers
   handleGenerateButtonClick(tooltip);
-  handleRegenerateButtonClick(tooltip);
   handleAcceptButtonClick(tooltip);
   handleDiscardButtonClick(tooltip);
 }

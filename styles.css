@@ -117,21 +117,78 @@ body {
   height: auto; /* Adjust height to accommodate the new layout */
 }
 
+/* input box animation start */
+/* Base styling for the input box */
 #input-box {
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  margin-bottom: 10px; /* Space between input box and buttons */
-  font-size: 14px;
-  width: 100%;
-  box-sizing: border-box; /* Ensure consistent sizing */
+  position: relative;
+  width: auto;
+  padding: 12px 20px; /* Slightly larger padding for better spacing */
+  font-size: 1em;
+  border: 2px solid #ddd; /* Subtle border for definition */
+  border-radius: 25px; /* More rounded corners */
+  outline: none;
+  background: #fff; /* Default background */
+  color: #333; /* Default text color */
+  transition: all 0.3s ease-in-out; /* Smooth transitions for all properties */
+  margin-bottom: 10px; /* Slightly larger margin */
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+  overflow: hidden; /* Ensures the gradient doesn't overflow */
 }
+
+/* AI-powered background animation */
+#input-box.ai-enhanced {
+  background: linear-gradient(
+    90deg,
+    #ff007f, /* Pink */
+    #ff8c00, /* Orange */
+    #ffd700, /* Gold */
+    #32cd32, /* Lime Green */
+    #00bfff, /* Deep Sky Blue */
+    #8a2be2, /* Blue Violet */
+    #ff007f /* Pink (loop back) */
+  );
+  background-size: 400% 100%; /* Extend the gradient beyond the box */
+  animation: ai-background-glow 6s linear infinite; /* Smooth gradient movement */
+  border-color: transparent; /* Hide the border for a cleaner look */
+  color: #fff; /* White text for better contrast */
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3); /* Enhanced shadow for a glowing effect */
+}
+
+/* Gradient animation for the background */
+@keyframes ai-background-glow {
+  0% {
+    background-position: 100% 0; /* Start gradient from the right */
+  }
+  100% {
+    background-position: 0 0; /* Move gradient to the left */
+  }
+}
+
+/* Hover effect for the input box */
+#input-box:hover {
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3); /* Enhanced shadow on hover */
+}
+
+/* Focus effect for the input box */
+#input-box:focus {
+  border-color: #00bfff; /* Highlight border color on focus */
+  box-shadow: 0 4px 20px rgba(0, 191, 255, 0.4); /* Glowing shadow on focus */
+}
+/* input box animation end */
 
 .button-group {
   display: flex;
   justify-content: space-between;
+  transition: all 0.3s ease-in-out; /* Smooth transition */
 }
 
+.button-group button {
+  transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out; /* Smooth transition for buttons */
+}
+
+.button-group button:not(:last-child) {
+  margin-right: 8px; /* Add spacing between buttons */
+}
 .tooltip-actions button {
   padding: 10px 20px;
   border: none;
@@ -149,8 +206,58 @@ body {
   background-color: #dc3545;
 }
 
-#regenerate-button {
-  background-color: #007bff;
+/* Button styling */
+#generate-button {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 20px;
+  font-size: 1em;
+  font-weight: bold;
+  color: #fff;
+  background: black;
+  border: none;
+  border-radius: 10em;
+  cursor: pointer;
+  box-shadow: 0 1px 3px 1px rgba(0, 0, 0, 0.25);
+  transition: box-shadow 250ms ease-in-out;
+}
+
+/* Add hover effect */
+#generate-button:hover {
+  box-shadow: 0 1px 3px 1px rgba(0, 0, 0, 0.1);
+}
+
+/* Add glow effect using :before */
+#generate-button:before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 10em;
+  background: linear-gradient(
+    45deg,
+    #fb0094,
+    #0000ff,
+    #00ff00,
+    #ffff00,
+    #ff0000
+  );
+  background-size: 200%;
+  z-index: -1;
+  opacity: 0;
+  filter: blur(0);
+  transition: filter 250ms ease-in-out, opacity 250ms ease-in-out;
+  animation: ai-button-glow 5s linear infinite;
+}
+
+/* Hover effect for :before */
+#generate-button:hover:before {
+  opacity: 1;
+  filter: blur(0.5em);
 }
 
 
